@@ -31,7 +31,7 @@
     'website': 'https://www.cybrosys.com',
     'depends': ['stock', 'product'],
     'data': [
-        'views/product_label.xml',
+        #'views/product_label.xml',
     ],
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',

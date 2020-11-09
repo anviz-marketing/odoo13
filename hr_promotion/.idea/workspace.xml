@@ -47,6 +47,9 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="418" y="194" width="604" height="548" key="find.popup" timestamp="1604849549788">
       <screen x="0" y="23" width="1440" height="831" />

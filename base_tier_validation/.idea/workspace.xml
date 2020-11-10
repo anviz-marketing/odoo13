@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="ee5752fb-3451-467e-9e61-a2cae24f11c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/models/tier_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tier_validation.py" afterDir="false" />
+    <list default="true" id="9c3650ec-9bfa-43de-89c3-bcb6f7506d6f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/tier_review.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tier_review.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/src/xml/tier_review_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/static/src/xml/tier_review_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/tier_review_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/views/tier_review_view.xml" afterDir="false" />
     </list>
-=======
-    <list default="true" id="ee5752fb-3451-467e-9e61-a2cae24f11c1" name="Default Changelist" comment="" />
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +32,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ee5752fb-3451-467e-9e61-a2cae24f11c1" name="Default Changelist" comment="" />
+      <changelist id="9c3650ec-9bfa-43de-89c3-bcb6f7506d6f" name="Default Changelist" comment="" />
       <created>1591249182603</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

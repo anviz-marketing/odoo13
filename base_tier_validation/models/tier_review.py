@@ -22,6 +22,8 @@ class TierReview(models.Model):
     definition_id = fields.Many2one(comodel_name="tier.definition")
     review_type = fields.Selection(related="definition_id.review_type", readonly=True)
     reviewer_id = fields.Many2one(related="definition_id.reviewer_id", readonly=True)
+
+
     reviewer_group_id = fields.Many2one(
         related="definition_id.reviewer_group_id", readonly=True
     )
@@ -46,6 +48,7 @@ class TierReview(models.Model):
     approve_sequence = fields.Boolean(
         related="definition_id.approve_sequence", readonly=True
     )
+
 
     @api.depends("definition_id.approve_sequence")
     def _compute_can_review(self):

@@ -26,6 +26,7 @@
                     <th class="text-center">Sequence</th>
                     <th class="text-left">Requested by</th>
                     <th class="text-right">Description</th>
+                    <th class="text-right">Reviewer</th>
                     <th class="text-right">Status</th>
                     <th class="text-right">Done by</th>
                     <th class="text-right">Validation Date</th>
@@ -58,6 +59,9 @@
                         </td>
                         <td class="text-right">
                             <span t-esc="review.name" />
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="review.reviewer_id" />
                         </td>
                         <td class="text-right">
                             <span t-esc="review.display_status" />

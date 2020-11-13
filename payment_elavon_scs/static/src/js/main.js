@@ -1,6 +1,6 @@
 odoo.define('payment_elavon.payment_elavon',function(require){
     'use strict';
-    var url = "https://api.demo.convergepay.com/hosted-payments/transaction_token"; // URL to Converge demo session token server
+    var url = "https://demo.convergepay.com/hosted-payments/transaction_token"; // URL to Converge demo session token server
        var ajax = require('web.ajax');
         $(document).ready(function(){
         ajax.jsonRpc("/payment/get_env", 'call', {},{

@@ -84,7 +84,7 @@ class ElavonController(http.Controller):
         elavon_acquirer_obj = request.env['payment.acquirer'].search([('provider', '=', 'elavon')])
         postmark_url = 'https://api.convergepay.com/hosted-payments/PayWithConverge.js'
         if elavon_acquirer_obj.state == 'test':
-            postmark_url = 'https://api.demo.convergepay.com/hosted-payments/PayWithConverge.js'
+            postmark_url = 'https://demo.convergepay.com/hosted-payments/PayWithConverge.js'
 
         return postmark_url
 
@@ -93,7 +93,7 @@ class ElavonController(http.Controller):
         elavon_acquirer_obj = request.env['payment.acquirer'].search([('provider', '=', 'elavon')])
         postmark_url = 'https://api.convergepay.com/hosted-payments/transaction_token'
         if elavon_acquirer_obj.state == 'test':
-            postmark_url = 'https://api.demo.convergepay.com/hosted-payments/transaction_token'
+            postmark_url = 'https://demo.convergepay.com/hosted-payments/transaction_token'
 
         buffer = io.BytesIO()
         post_data = {

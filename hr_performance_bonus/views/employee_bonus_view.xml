@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_employee_bonus_form" model="ir.ui.view">
+        <field name="name">hr.employee.Bonus_form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="bonus" string="Bonus">
+                    <group>
+                        <group>
+                            <field name="bonus_amount">%</field>
+                        </group>
+                        <group>
+                            <!--field name="deduced_amount_per_year"/>
+                            <field name="deduced_amount_per_month"/>
+                            <field name="insurance_pasion_personal"/>
+                            <field name="insurance_medical_personal"/>
+                            <field name="insurance_unemployment_personal"/>
+                            <field name="insurance_hf_personal"/-->
+
+                        </group>
+                    </group>
+                    <field name="bonus" context="{'default_employee_id':id}"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+        <record id="employee_bonus__details_form" model="ir.ui.view">
+            <field name="name">Employee Bonus</field>
+            <field name="model">hr.bonus</field>
+            <field name="arch" type="xml">
+                <form string="Employee Bonus">
+                    <header>
+                     <field name="state" widget="statusbar" statusbar_visible="active,expired"/>
+                    </header>
+                    <sheet>
+                        <!--<header>-->
+                            <!--<field name="state" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}'/>-->
+                        <!--</header>-->
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="policy_coverage"/>
+                                <label for="date_from" string="Policy Period"/>
+			<div>
+				<field name="date_from" class="oe_inline" on_change="1" modifiers="{'readonly': [['state', 'not in', ['draft']]], 'required': true}"/>
+				  -
+				<field name="date_to" class="oe_inline" on_change="1" modifiers="{'readonly': [['state', 'not in', ['draft']]], 'required': true}"/>
+			</div>
+                            </group>
+                            <group>
+                                <!--field name="policy_id"/-->
+                                <field name="base"/>
+                                <field name="ratio"/>
+                                <field name="bonus"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="employee_bonus_details_tree" model="ir.ui.view">
+            <field name="name">Employee Bonus</field>
+            <field name="model">hr.bonus</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Bonus">
+                     <field name="employee_id"/>
+                    <!--field name="policy_id"/-->
+                    <field name="policy_coverage"/>
+                    <field name="base"/>
+                    <field name="ratio"/>
+                    <field name="bonus"/>
+                    <field name="date_from" />
+				<field name="date_to"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_employee_bonus_details" model="ir.actions.act_window">
+            <field name="name">Employee Bonus</field>
+            <field name="res_model">hr.bonus</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You have'nt created any policy yet.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="hr_employee_bonus_menu"
+                name="Bonus"
+                parent="hr.menu_hr_root"
+                action="action_employee_bonus_details"/>
+    </data>
+</odoo>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_employee_promotion_form" model="ir.ui.view">
+        <field name="name">hr.employee.promotion_form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="promotion" string="Promotion">
+                    <group>
+                        <group>
+                            <field name="promotion_salary"/>
+                        </group>
+                        <!--group>
+                            <field name="insurance_pesion_personal"/>
+                            <field name="insurance_pesion_company"/>
+                            <field name="insurance_medical_personal"/>
+                            <field name="insurance_medical_company"/>
+                            <field name="insurance_fertility_personal"/>
+                            <field name="insurance_fertility_company"/>
+                        </group>
+                        <group>
+                            <field name="insurance_injury_personal"/>
+                            <field name="insurance_injury_company"/>
+                            <field name="insurance_unemployment_personal"/>
+                            <field name="insurance_unemployment_company"/>
+                            <field name="insurance_hf_personal"/>
+                            <field name="insurance_hf_company"/>
+                            <!field name="insurance_unemployment_personal"/>
+                            <field name="insurance_hf_personal"/-->
+
+                        <!--/group-->
+                    </group>
+                    <field name="promotion" context="{'default_employee_id':id}"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+        <record id="employee_promotion__details_form" model="ir.ui.view">
+            <field name="name">Employee Promotion</field>
+            <field name="model">hr.promotion</field>
+            <field name="arch" type="xml">
+                <form string="Employee Promotion">
+                    <!--header>
+                     <field name="state" widget="statusbar" statusbar_visible="active,expired"/>
+                    </header-->
+                    <sheet>
+                        <!--<header>-->
+                            <!--<field name="state" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}'/>-->
+                        <!--</header>-->
+                        <!--group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="policy_coverage"/>
+                                <label for="date_from" string="Policy Period"/>
+			<div>
+				<field name="date_from" class="oe_inline" on_change="1" modifiers="{'readonly': [['state', 'not in', ['draft']]], 'required': true}"/>
+				  -
+				<field name="date_to" class="oe_inline" on_change="1" modifiers="{'readonly': [['state', 'not in', ['draft']]], 'required': true}"/>
+			</div>
+                            </group-->
+                            <group>
+                                <!--field name="policy_id"/-->
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="previous_job_position"/>
+                                <field name="new_job_position"/>
+                                <field name="previous_salary"/>
+                                <field name="new_salary"/>
+                                <field name="date"/>
+                                <field name="company_id"/>
+                            </group>
+                        <!--/group-->
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="employee_promotion_details_tree" model="ir.ui.view">
+            <field name="name">Employee Promotion</field>
+            <field name="model">hr.promotion</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Promotion">
+                     <field name="employee_id"/>
+                    <field name="name"/>
+                    <field name="previous_job_position"/>
+                    <field name="new_job_position"/>
+                    <field name="previous_salary"/>
+                    <field name="new_salary"/>
+                    <field name="date"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_employee_promotion_details" model="ir.actions.act_window">
+            <field name="name">Employee Promotion</field>
+            <field name="res_model">hr.promotion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You have'nt created any policy yet.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="hr_employee_promotion_menu"
+                name="Promotion"
+                parent="hr.menu_hr_root"
+                action="action_employee_promotion_details"/>
+    </data>
+</odoo>

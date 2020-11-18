@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/views/employee_promotion_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/views/employee_promotion_view.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,12 +46,21 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="418" y="194" width="604" height="548" key="find.popup" timestamp="1604849549788">
+    <state x="418" y="194" width="604" height="548" key="find.popup" timestamp="1604904425908">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state x="418" y="194" width="604" height="548" key="find.popup/0.23.1440.831@0.23.1440.831" timestamp="1604849549788" />
+    <state x="418" y="194" width="604" height="548" key="find.popup/0.23.1440.831@0.23.1440.831" timestamp="1604904425908" />
   </component>
 </project>

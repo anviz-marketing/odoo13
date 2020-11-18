@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--<data>
+        <record id="hr_salary_rule_tax_deduction" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="code">tax_deductionS</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=(contract.get_all_tax_deductions())</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">tax_deductions</field>
+            <field name="sequence" eval="51"/>
+            <field name="note">Get all overtime granted to employee</field>
+            <field name="struct_id" ref="hr_payroll_structure_2"/>
+        </record>
+    </data>-->
+</odoo>

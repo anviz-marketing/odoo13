@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../hr_promotion/views/employee_promotion_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hr_promotion/views/employee_promotion_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/employee_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/employee_insurance.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +58,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="418" y="194" width="604" height="548" key="find.popup" timestamp="1604849549788">

@@ -61,7 +61,7 @@ class EmployeePerformanceBonus(models.Model):
 class HrBouns(models.Model):
     _inherit = 'hr.employee'
 
-    bonus_amount= fields.Float(string="Performance Bonus", compute="get_bonus")
+    bonus_amount= fields.Float(string="Performance Bonus", default=0, compute="get_bonus")
     bonus = fields.One2many('hr.bonus', 'employee_id', string="Bonus", help="Bonus",
                                 domain=[('state', '=', 'active')])
 

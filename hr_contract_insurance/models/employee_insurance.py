@@ -68,23 +68,21 @@ class EmployeeInsurance(models.Model):
 class HrInsurance(models.Model):
     _inherit = 'hr.employee'
 
-
-    insurance_percentage = fields.Float(string="Company Percentage ", help="Company insurance percentage")
     insurance = fields.One2many('hr.insurance', 'employee_id', string="Insurance", help="Insurance",
                                 domain=[('state', '=', 'active')])
-    insurance_pesion_personal = fields.Float(string="pesion personal", compute="get_insure_subtotal")
-    insurance_medical_personal = fields.Float(string="medical personal", compute="get_insure_subtotal")
-    insurance_unemployment_personal = fields.Float(string="unemployment personal", compute="get_insure_subtotal")
-    insurance_hf_personal = fields.Float(string="house fund personal", compute="get_insure_subtotal")
-    insurance_fertility_personal = fields.Float(string="fertility personal", compute="get_insure_subtotal")
-    insurance_injury_personal = fields.Float(string="injury personal", compute="get_insure_subtotal")
-    insurance_pesion_company = fields.Float(string="pesion company", compute="get_insure_subtotal")
-    insurance_medical_company = fields.Float(string="medical company", compute="get_insure_subtotal")
-    insurance_unemployment_company = fields.Float(string="unemployment company", compute="get_insure_subtotal")
-    insurance_hf_company = fields.Float(string="house fund company", compute="get_insure_subtotal")
-    insurance_fertility_company = fields.Float(string="fertility company", compute="get_insure_subtotal")
-    insurance_injury_company = fields.Float(string="injury company", compute="get_insure_subtotal")
-    length_of_service = fields.Integer(string="Length of service", compute='compute_service_years')
+    insurance_pesion_personal = fields.Float(string="pesion personal", default=0, compute="get_insure_subtotal")
+    insurance_medical_personal = fields.Float(string="medical personal", default=0, compute="get_insure_subtotal")
+    insurance_unemployment_personal = fields.Float(string="unemployment personal", default=0,  compute="get_insure_subtotal")
+    insurance_hf_personal = fields.Float(string="house fund personal", default=0, compute="get_insure_subtotal")
+    insurance_fertility_personal = fields.Float(string="fertility personal", default=0, compute="get_insure_subtotal")
+    insurance_injury_personal = fields.Float(string="injury personal", default=0, compute="get_insure_subtotal")
+    insurance_pesion_company = fields.Float(string="pesion company", default=0, compute="get_insure_subtotal")
+    insurance_medical_company = fields.Float(string="medical company", default=0, compute="get_insure_subtotal")
+    insurance_unemployment_company = fields.Float(string="unemployment company", default=0, compute="get_insure_subtotal")
+    insurance_hf_company = fields.Float(string="house fund company", default=0, compute="get_insure_subtotal")
+    insurance_fertility_company = fields.Float(string="fertility company", default=0, compute="get_insure_subtotal")
+    insurance_injury_company = fields.Float(string="injury company", default=0, compute="get_insure_subtotal")
+    length_of_service = fields.Integer(string="Length of service", default=0, compute='compute_service_years')
 
     @api.onchange('self.joining_date')
     def compute_service_years(self):

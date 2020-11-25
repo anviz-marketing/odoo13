@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="493c1319-0326-4621-b501-aee0f4c444b2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1kXbQz977XXC0W5ok8bV6DLyRV0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="493c1319-0326-4621-b501-aee0f4c444b2" name="Default Changelist" comment="" />
+      <created>1605849870583</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605849870583</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="190" width="597" height="490" key="find.popup" timestamp="1606115330308">
+      <screen x="0" y="25" width="1440" height="820" />
+    </state>
+    <state x="421" y="190" width="597" height="490" key="find.popup/0.25.1440.820@0.25.1440.820" timestamp="1606115330308" />
+    <state x="421" y="190" width="597" height="490" key="find.popup/0.25.1440.821@0.25.1440.821" timestamp="1606113730068" />
+    <state x="421" y="190" width="597" height="490" key="find.popup/0.25.1440.822@0.25.1440.822" timestamp="1605868050895" />
+  </component>
+</project>

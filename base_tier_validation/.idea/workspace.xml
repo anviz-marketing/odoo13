@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c3650ec-9bfa-43de-89c3-bcb6f7506d6f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/models/tier_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tier_validation.py" afterDir="false" />
-    </list>
+    <list default="true" id="9c3650ec-9bfa-43de-89c3-bcb6f7506d6f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

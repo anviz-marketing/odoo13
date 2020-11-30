@@ -103,9 +103,10 @@ class ElavonController(http.Controller):
             'ssl_transaction_type': 'CCSALE',
             'ssl_first_name': emp_id.get("ssl_first_name"),
             'ssl_last_name': emp_id.get("ssl_last_name"),
-            'ssl_avs_address':emp_id.get('ssl_avs_address'),
-            'ssl_get_token':'Y',
-            'ssl_add_token':'Y',
+            'ssl_avs_address': emp_id.get('ssl_avs_address'),
+            'ssl_avs_zip': emp_id.get('ssl_avs_zip'),
+            'ssl_get_token': 'Y',
+            'ssl_add_token': 'Y',
             'ssl_amount': emp_id.get("ssl_amount"),
         }
         postfields = urlencode(post_data)

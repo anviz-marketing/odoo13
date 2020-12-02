@@ -44,6 +44,7 @@ class ElavonController(http.Controller):
     def elavon_get_sale_order_detail(self, **post):
         try:
             sale_order_reference = post.get('sale_order_reference')
+            sale_order_amount = post.get('sale_order_amount')
             sale_order_id = post.get('sale_order_id')
             sale_order = request.env['sale.order'].sudo().search([('id', '=', sale_order_id)])
             vales = {
@@ -51,7 +52,8 @@ class ElavonController(http.Controller):
                 'amount': sale_order.amount_total,
                 'fname': sale_order.partner_id.name,
                 'lname': '',
-                'sale_order_reference':sale_order_reference,
+                'sale_order_reference': sale_order_reference,
+                'sale_order_amount': sale_order_amount,
             }
         except:
             inv_id = request.env['account.invoice'].search([('id', '=', post.get('inv_id'))])

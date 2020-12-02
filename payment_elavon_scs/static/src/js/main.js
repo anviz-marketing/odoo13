@@ -9,10 +9,10 @@ odoo.define('payment_elavon.payment_elavon',function(require){
         })
 
     $('#o_payment_form_pay').click(function(){
-    var sale_order_reference = $( ".reference" ).val();
+    var sale_order_reference = $( "reference" ).val();
     var sale_order_amount= $( ".amount" ).val();
         console.log(sale_order_reference,sale_order_amount)
-    ajax.jsonRpc("/payment/elavon_get_sale_order_detail", 'call', {"sale_order_id":$('.sale_order_id').val(),sale_order_reference:sale_order_reference,sale_order_amount:sale_order_amount,'inv_id':$('.inv_id').val()},{
+    ajax.jsonRpc("/payment/elavon_get_sale_order_detail", 'call', {"sale_order_id":$('.sale_order_id').val(),"sale_order_reference":sale_order_reference,"sale_order_amount":sale_order_amount,'inv_id':$('.inv_id').val()},{
 
         }).then(function(value){
 

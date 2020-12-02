@@ -40,7 +40,7 @@ class ElavonController(http.Controller):
     _decline_url = '/payment_fail'
 
     @http.route('/payment/elavon_get_sale_order_detail', type='json',
-                methods=['GET', 'POST'], auth="public", csrf=True)
+                methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
         try:
             sale_order_id = post.get('sale_order_id')

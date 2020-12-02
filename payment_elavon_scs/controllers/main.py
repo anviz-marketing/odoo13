@@ -35,18 +35,12 @@ class WebsiteSaleAddress(WebsiteSale):
         req = super(WebsiteSaleAddress, self).payment(**post)
         return req
 
-    @http.route(['/website_payment'], type='http', auth="public", website=True, sitemap=False)
-    def website_payment(self, **post):
-        req = super(WebsiteSaleAddress, self).payment(**post)
-        return req
-
-
 class ElavonController(http.Controller):
     _return_url = '/payment_success'
     _decline_url = '/payment_fail'
 
     @http.route('/payment/elavon_get_sale_order_detail', type='json',
-                methods=['GET', 'POST'], auth="public", csrf=False)
+                methods=['GET', 'POST'], auth="public", csrf=True)
     def elavon_get_sale_order_detail(self, **post):
         try:
             sale_order_id = post.get('sale_order_id')

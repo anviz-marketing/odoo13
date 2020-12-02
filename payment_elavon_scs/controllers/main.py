@@ -35,6 +35,11 @@ class WebsiteSaleAddress(WebsiteSale):
         req = super(WebsiteSaleAddress, self).payment(**post)
         return req
 
+    @http.route(['/website_payment'], type='http', auth="public", website=True, sitemap=False)
+    def website_payment(self, **post):
+        req = super(WebsiteSaleAddress, self).payment(**post)
+        return req
+
 
 class ElavonController(http.Controller):
     _return_url = '/payment_success'

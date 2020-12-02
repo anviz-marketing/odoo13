@@ -50,8 +50,8 @@ class ElavonController(http.Controller):
                 'id': sale_order.id,
                 'amount': sale_order.amount_total,
                 'fname': sale_order.partner_id.name,
-                'lname': ''
-                'sale_order_reference':sale_order_reference
+                'lname': '',
+                'sale_order_reference':sale_order_reference,
             }
         except:
             inv_id = request.env['account.invoice'].search([('id', '=', post.get('inv_id'))])

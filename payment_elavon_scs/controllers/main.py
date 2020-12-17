@@ -59,7 +59,7 @@ class ElavonController(http.Controller):
                 'sale_order_amount': sale_order_amount,
             }
         except:
-            inv_id = request.env['account.move'].search([('id', '=', post.get('inv_id'))])
+            inv_id = request.env['account.invoice'].search([('id', '=', post.get('inv_id'))])
             vales = {
                 'id': inv_id.id,
                 'amount': inv_id.residual,

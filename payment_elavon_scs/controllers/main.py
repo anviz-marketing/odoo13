@@ -43,12 +43,12 @@ class ElavonController(http.Controller):
                 methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
         try:
-            sale_order_ref = post.get('sale_order_ref')
+            order_id = post.get('oder_id')
             sale_order_id = post.get('sale_order_id')
             if sale_order_id:
                 domain = [('id', '=', sale_order_id)]
             else:
-                domain = [('name', '=', sale_order_ref)]
+                domain = [('id', '=', order_id)]
             sale_order = request.env['sale.order'].sudo().search(domain)
             vales = {
                 'id': sale_order.id,

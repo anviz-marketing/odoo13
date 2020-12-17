@@ -62,7 +62,7 @@ class ElavonController(http.Controller):
             inv_id = request.env['account.move'].sudo().search([('id', '=', post.get('inv_id'))])
             vales = {
                 'id': inv_id.id,
-                'amount': inv_id.residual,
+                'amount': inv_id.amount_residual,
                 'fname': inv_id.partner_id.name,
                 'lname': ''
             }

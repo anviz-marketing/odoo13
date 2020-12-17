@@ -44,8 +44,8 @@ class ElavonController(http.Controller):
                 methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
         try:
-            sale_order_id = int(post.get('sale_order_id'))
-            sale_order = request.env['sale.order'].sudo().search([('id', '=', int(sale_order_id))])
+            sale_order_id = post.get('sale_order_id')
+            sale_order = request.env['sale.order'].sudo().search([('id', '=', sale_order_id)])
             vales = {
                 'id': sale_order.id,
                 'amount': sale_order.amount_total,
@@ -53,7 +53,7 @@ class ElavonController(http.Controller):
                 'lname': ''
             }
         except:
-            inv_id = request.env['account.invoice'].search([('id', '=', int(post.get('inv_id')))])
+            inv_id = request.env['account.invoice'].search([('id', '=', post.get('inv_id'))])
             vales = {
                 'id': inv_id.id,
                 'amount': inv_id.residual,

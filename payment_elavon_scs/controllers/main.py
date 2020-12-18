@@ -65,7 +65,7 @@ class ElavonController(http.Controller):
                 'fname': inv_id.partner_id.name,
                 'lname': ''
             }
-
+        print("vales =====:", vales)
         return vales
 
     @http.route('/payment/elavon/create_charge', type='json',

@@ -11,13 +11,11 @@ odoo.define('payment_elavon.payment_elavon',function(require){
     $('#o_payment_form_pay').click(function(){
 
     var urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.has('order_id')); // true
-    console.log(urlParams.get('order_id')); // "order_id"
-    var order_id = urlParams.get('order_id')
+    var order_id = urlParams.get('order_id');
 
     ajax.jsonRpc("/payment/elavon_get_sale_order_detail", 'call', {"order_id":order_id,"sale_order_id":$('.sale_order_id').val(),'inv_id':$('.inv_id').val()},{
         }).then(function(value){
-    console.log(value)
+    console.log(value);
            $.ajax({
                     type: "POST",
                     dataType: 'json',

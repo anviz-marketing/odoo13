@@ -51,21 +51,21 @@ class ElavonController(http.Controller):
                 domain = [('id', '=', sale_order_id)]
             sale_order = request.env['sale.order'].sudo().search(domain)
             vales = {
-                'id': sale_order.id,
-                'amount': sale_order.amount_total,
-                'fname': sale_order.partner_id.name,
-                'lname': ''
+            'id': sale_order.id,
+            'amount': sale_order.amount_total,
+            'fname': sale_order.partner_id.name,
+            'lname': ''
             }
-            return vales
+
         elif post.get('inv_id'):
             inv_id = request.env['account.move'].sudo().search([('id', '=', invoice_id)])
-                vales = {
+            vales = {
                     'id': inv_id.id,
                     'amount': inv_id.amount_residual,
                     'fname': inv_id.partner_id.name,
                     'lname': ''
                 }
-            return vales
+        return vales
 
 
         # try:

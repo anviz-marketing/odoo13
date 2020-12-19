@@ -43,12 +43,12 @@ class ElavonController(http.Controller):
     @http.route('/payment/elavon_get_sale_order_detail', type='json',
                 methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
-        try:
-            order_id = post.get('order_id')
-            sale_order_id = post.get('sale_order_id')
-            invoice_id = post.get('inv_id')
 
-        if  order_id or sale_order_id:
+
+        order_id = post.get('order_id')
+        sale_order_id = post.get('sale_order_id')
+        invoice_id = post.get('inv_id')
+        if order_id or sale_order_id:
 
             if order_id:
                 domain = [('id', '=', order_id)]

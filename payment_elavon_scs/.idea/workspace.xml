@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="006af184-8bbf-43c8-aa1d-ac3e90bcf0ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/static/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/src/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../device/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../device/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../quality_alert_state/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../quality_alert_state/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -14,7 +14,7 @@ odoo.define('payment_elavon.payment_elavon',function(require){
     console.log(urlParams.has('order_id')); // true
     console.log(urlParams.get('order_id')); // "order_id"
     var order_id = urlParams.get('order_id')
-    
+
     ajax.jsonRpc("/payment/elavon_get_sale_order_detail", 'call', {"order_id":$('.order_id').val(),"sale_order_id":$('.sale_order_id').val(),'inv_id':$('.inv_id').val()},{
         }).then(function(value){
 

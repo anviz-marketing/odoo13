@@ -43,9 +43,8 @@ class ElavonController(http.Controller):
     @http.route('/payment/elavon_get_sale_order_detail', type='json',
                 methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
-        try:
-            order_id = post.get('order_id')
-            sale_order_id = post.get('sale_order_id')
+
+        if post.get('order_id') or post.get('sale_order_id'):
             if order_id:
                 domain = [('id', '=', order_id)]
             else:
@@ -57,15 +56,39 @@ class ElavonController(http.Controller):
                 'fname': sale_order.partner_id.name,
                 'lname': ''
             }
-        except:
-            invoice_id = post.get('inv_id')
+        elif post.get('inv_id'):
             inv_id = request.env['account.move'].sudo().search([('id', '=', invoice_id)])
-            vales = {
-                'id': inv_id.id,
-                'amount': inv_id.amount_residual,
-                'fname': inv_id.partner_id.name,
-                'lname': ''
-            }
+                vales = {
+                    'id': inv_id.id,
+                    'amount': inv_id.amount_residual,
+                    'fname': inv_id.partner_id.name,
+                    'lname': ''
+                }
+            
+
+        # try:
+        #     order_id = post.get('order_id')
+        #     sale_order_id = post.get('sale_order_id')
+        #     if order_id:
+        #         domain = [('id', '=', order_id)]
+        #     else:
+        #         domain = [('id', '=', sale_order_id)]
+        #     sale_order = request.env['sale.order'].sudo().search(domain)
+        #     vales = {
+        #         'id': sale_order.id,
+        #         'amount': sale_order.amount_total,
+        #         'fname': sale_order.partner_id.name,
+        #         'lname': ''
+        #     }
+        # except:
+        #     invoice_id = post.get('inv_id')
+        #     inv_id = request.env['account.move'].sudo().search([('id', '=', invoice_id)])
+        #     vales = {
+        #         'id': inv_id.id,
+        #         'amount': inv_id.amount_residual,
+        #         'fname': inv_id.partner_id.name,
+        #         'lname': ''
+        #     }
         return vales
 
     @http.route('/payment/elavon/create_charge', type='json',

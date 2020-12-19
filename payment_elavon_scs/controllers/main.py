@@ -56,6 +56,7 @@ class ElavonController(http.Controller):
                 'fname': sale_order.partner_id.name,
                 'lname': ''
             }
+            return vales
         elif post.get('inv_id'):
             inv_id = request.env['account.move'].sudo().search([('id', '=', invoice_id)])
                 vales = {
@@ -64,7 +65,8 @@ class ElavonController(http.Controller):
                     'fname': inv_id.partner_id.name,
                     'lname': ''
                 }
-            
+            return vales
+
 
         # try:
         #     order_id = post.get('order_id')
@@ -89,7 +91,7 @@ class ElavonController(http.Controller):
         #         'fname': inv_id.partner_id.name,
         #         'lname': ''
         #     }
-        return vales
+
 
     @http.route('/payment/elavon/create_charge', type='json',
                 methods=['GET', 'POST'], auth="public", csrf=False)

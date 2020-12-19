@@ -44,7 +44,7 @@ class ElavonController(http.Controller):
                 methods=['GET', 'POST'], auth="public", csrf=False)
     def elavon_get_sale_order_detail(self, **post):
 
-        if post.get('order_id') or post.get('sale_order_id'):
+        if order_id = post.get('order_id') or  sale_order_id = post.get('sale_order_id'):
             if order_id:
                 domain = [('id', '=', order_id)]
             else:

@@ -48,7 +48,8 @@ class ElavonController(http.Controller):
             sale_order_id = post.get('sale_order_id')
             invoice_id = post.get('inv_id')
 
-        if  post.get('order_id') or  sale_order_id = post.get('sale_order_id'):
+        if  post.get('order_id') or   post.get('sale_order_id'):
+
             if order_id:
                 domain = [('id', '=', order_id)]
             else:

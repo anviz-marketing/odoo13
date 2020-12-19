@@ -138,6 +138,8 @@ class ElavonController(http.Controller):
             'ssl_transaction_type': 'CCSALE',
             'ssl_first_name': emp_id.get("ssl_first_name"),
             'ssl_last_name': emp_id.get("ssl_last_name"),
+            'ssl_first_name': emp_id.get("ssl_first_name"),
+            'ssl_last_name': emp_id.get("ssl_last_name"),
             'ssl_get_token': 'Y',
             'ssl_add_token': 'Y',
             'ssl_amount': emp_id.get("ssl_amount"),

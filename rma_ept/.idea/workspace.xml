@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="880171ab-ff5e-4621-a6ca-47ed86940759" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/models/crm_claim_ept.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/crm_claim_ept.py" afterDir="false" />
-    </list>
+    <list default="true" id="82ddfbe0-ebf3-4661-8373-ca91f1231779" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,7 +10,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1kmBg7QiigMA9BI2PqcWg1ge5fF" />
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1mGwpHBiDW7LrExHwhaksJkNLF8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -20,26 +26,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="880171ab-ff5e-4621-a6ca-47ed86940759" name="Default Changelist" comment="" />
-      <created>1606295994898</created>
+      <changelist id="82ddfbe0-ebf3-4661-8373-ca91f1231779" name="Default Changelist" comment="" />
+      <created>1609133416388</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1606295994898</updated>
+      <updated>1609133416388</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="421" y="189" width="597" height="490" key="find.popup" timestamp="1606374741573">
-      <screen x="0" y="25" width="1440" height="820" />
-    </state>
-    <state x="421" y="189" width="597" height="490" key="find.popup/0.25.1440.820/1440.25.1920.1055@0.25.1440.820" timestamp="1606374741573" />
-    <state x="421" y="189" width="597" height="490" key="find.popup/0.25.1440.820@0.25.1440.820" timestamp="1606372019120" />
-    <state x="421" y="190" width="597" height="490" key="find.popup/0.25.1440.822@0.25.1440.822" timestamp="1606297572869" />
-    <state x="421" y="190" width="597" height="492" key="find.popup/0.25.1440.824@0.25.1440.824" timestamp="1606363412404" />
   </component>
 </project>

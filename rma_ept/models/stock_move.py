@@ -9,6 +9,8 @@ class stock_move(models.Model):
         with incoming. It will not be used when without incoming.
         Add help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
+
+        print('stock move vals:', vals)
         if 'state' in vals and self:
             if self[0].picking_code == 'incoming' and vals.get('state') == 'done':
                 rma = self.env['crm.claim.ept'].search(
@@ -18,7 +20,7 @@ class stock_move(models.Model):
                     if enterprise_rma and enterprise_rma.state =='installed':
                         rma = self.env['helpdesk.ticket'].search(
                             [('return_picking_id', '=', self[0].picking_id.id)])
-                rma and rma.state == 'approve' and rma.write({'state':'process'})
+                rma and rma.state == 'approve' and rma.write({'state':'action'})
         return super(stock_move, self).write(vals)
 
     # def set_lot_serial_number(self):

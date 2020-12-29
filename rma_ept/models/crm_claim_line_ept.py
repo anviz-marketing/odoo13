@@ -55,7 +55,8 @@ class CRMClaimLine(models.Model):
             if line.quantity < 0:
                 raise Warning(_('Quantity must be positive number'))
             elif line.quantity > line.move_id.quantity_done:
-                raise Warning(_('Quantity must be less than or equal to the delivered quantity'))
+                pass
+                #modify by awahuang at 2020/11/25 raise Warning(_('Quantity must be less than or equal to the delivered quantity'))
 
     @api.onchange('serial_lot_ids')
     def onchange_serial_lot_id(self):
@@ -66,6 +67,7 @@ class CRMClaimLine(models.Model):
             if self.quantity < len(self.serial_lot_ids.ids):
                 raise Warning(_('Lenth of Lot/Serial number are greater then the Return Quantity '
                                 '! \n Please set the proper Lot/Serial Number'))
+
 
     @api.onchange('rma_reason_id')
     def onchange_product_id(self):

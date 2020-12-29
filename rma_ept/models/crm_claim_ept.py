@@ -111,9 +111,149 @@ class CRMClaim(models.Model):
             record.move_product_ids = [(6, 0, move_products)]
 
     def get_so(self):
+
         for record in self:
+
             if record.picking_id:
                 record.sale_id = record.picking_id.sale_id.id
+            else:
+                if self.is_rma_without_sale_order:
+                    claim_lines = []
+                    for line in self.claim_line_ids:
+                        if line.quantity <= 0 or not line.rma_reason_id:
+                            raise Warning(_("Please set Return Quantity and Reason for all products."))
+                        # if line.product_id.tracking in ['serial', 'lot']:
+                        if line.product_id.tracking in ['serial', 'lot']:
+                            if line.product_id.tracking == 'serial' and len(line.serial_lot_ids) != \
+                                    line.quantity:
+                                raise Warning(_(
+                                    "Please set Serial number for product: '%s', and number of  Serial numbers must equal the return quantity" % (
+                                        line.product_id.name)))
+                            elif line.product_id.tracking == 'lot' and len(line.serial_lot_ids) != 1:
+                                raise Warning(_(
+                                    "Please set Lot number for product: '%s'." % (line.product_id.name)))
+
+                    for line in record.claim_line_ids:
+                        claim_lines.append({'product_id': line.product_id.id,
+                                            'quantity': line.quantity, })
+                    record.create_so_without(claim_lines)
+                    for id in record.sale_id.picking_ids:
+                        if id.picking_type_id.name =='Delivery Orders':
+                            record.picking_id = id
+
+                    stock_onhand = self.env['stock.quant']
+                    for line in record.claim_line_ids:
+                        if line.product_id.tracking in ['serial', 'lot']:
+                            if line.product_id.tracking == 'serial':
+                                for i in range(int(line.quantity)):
+                                    stock_onhand_line_serial = {
+                                        'product_id': line.product_id.id,
+                                        'quantity': 1,
+                                        'location_id': record.picking_id.location_id.id,
+                                        'lot_id': line.serial_lot_ids[i].id
+                                    }
+                                    stock_onhand.create(stock_onhand_line_serial)
+                            elif line.product_id.tracking == 'lot':
+
+                                stock_onhand_line_lot = {
+                                    'product_id': line.product_id.id,
+                                    'quantity': line.quantity,
+                                    'location_id': record.picking_id.location_id.id,
+                                    'lot_id': line.serial_lot_ids[0].id
+                                }
+                                stock_onhand.create(stock_onhand_line_lot)
+                        else:
+                            stock_onhand_line = {
+                                'product_id': line.product_id.id,
+                                'quantity': line.quantity,
+                                'location_id': record.picking_id.location_id.id,
+                            }
+                            stock_onhand.create(stock_onhand_line)
+                    record.picking_id.action_assign()
+
+                    for move in record.picking_id.move_lines.filtered(lambda m: m.state not in ['done', 'cancel']):
+                        if not move.move_line_ids:
+                            stock_move_line_obj = self.env['stock.move.line']
+                            claim_line = self.claim_line_ids.filtered(lambda l: l.product_id in [move.product_id])
+                            move_line_vals = {'move_id': move.id,
+                                              'location_id': move.location_id.id,
+                                              'location_dest_id': move.location_dest_id.id,
+                                              'product_uom_id': move.product_id.uom_id.id,
+                                              'product_id': move.product_id.id,
+                                              'picking_id': record.picking_id.id
+                                              }
+                            for lot_serial_id in claim_line.serial_lot_ids:
+                                if move.product_id.tracking == 'lot':
+                                    move_line_vals.update({'lot_id': lot_serial_id.id,
+                                                           'qty_done': move.product_uom_qty})
+                                else:
+                                    move_line_vals.update({'lot_id': lot_serial_id.id,
+                                                           'qty_done': 1})
+                                stock_move_line_obj.create(move_line_vals)
+                            if not claim_line.serial_lot_ids:
+                                move_line_vals.update({'qty_done': move.product_uom_qty})
+                                stock_move_line_obj.create(move_line_vals)
+                        else:
+                            for move_line in move.move_line_ids:
+                                move_line.qty_done = move_line.product_uom_qty
+                    for line in record.claim_line_ids:
+                        move_lines = self.env['stock.move.line'].search(
+                            [['picking_id', '=', record.picking_id.id], ['product_id', '=', line.product_id.id]])
+                        if line.product_id.tracking in ['serial', 'lot'] and move_lines:
+                            if line.product_id.tracking == 'serial':
+                                for i in range(int(line.quantity)):
+                                    move_lines[i].lot_id = line.serial_lot_ids[i].id
+                            elif line.product_id.tracking == 'lot':
+                                move_lines[0].lot_id = line.serial_lot_ids[0].id
+                    record.picking_id.action_done()
+                    for line in range(len(record.claim_line_ids)):
+                        record.claim_line_ids[line].move_id = record.picking_id.move_lines[line]
+
+    def create_so_without(self, claim_lines=[]):
+
+        sale_order = self.env['sale.order']
+        order_vals = {
+            'company_id': self.company_id,
+            'partner_id': self.partner_id,
+            # 'warehouse_id': id.sale_id.warehouse_id.id,
+        }
+        new_record = sale_order.new(order_vals)
+        new_record.onchange_partner_id()
+        order_vals = sale_order._convert_to_write({name: new_record[name] for name in new_record._cache})
+        new_record = sale_order.new(order_vals)
+        new_record.onchange_partner_shipping_id()
+        order_vals = sale_order._convert_to_write({name: new_record[name] for name in new_record._cache})
+        order_vals.update({
+            'state': 'sale',
+            # 'team_id':self.section_id.id,
+            'client_order_ref': self.name,
+        })
+        so = sale_order.create(order_vals)
+        self.new_sale_id = so.id
+        for line in claim_lines:
+            sale_order_line = self.env['sale.order.line']
+            order_line = {
+                'order_id': so.id,
+                'product_id': line['product_id'],
+                'product_uom_qty': line['quantity'],
+                'company_id': self.company_id,
+
+                # 'name': self.env[product.product]line['product_id'].name
+            }
+            new_order_line = sale_order_line.new(order_line)
+            new_order_line.product_id_change()
+            order_line = sale_order_line._convert_to_write(
+                {name: new_order_line[name] for name in new_order_line._cache})
+            order_line.update({
+                'state': 'sale',
+                #'qty_delivered': line['quantity'],
+            })
+            sale_order_line.create(order_line)
+
+
+        # self.write({'new_sale_id': so.id})
+        self.write({'sale_id': so.id})
+        return True
 
     def get_is_visible(self):
         """
@@ -150,6 +290,7 @@ class CRMClaim(models.Model):
     is_visible = fields.Boolean(string='Is Visible', compute=get_is_visible, default=False)
     rma_send = fields.Boolean(string="RMA Send")
     is_rma_without_incoming = fields.Boolean(string="Is RMA Without Incoming", default=False)
+    is_rma_without_sale_order = fields.Boolean(string="Is RMA Without Sales Order", default=False)
     is_return_internal_transfer = fields.Boolean(string="Is Return Internal Trnafer", default=False)
 
     code = fields.Char(string='RMA Number', default="New", readonly=True, copy=False)
@@ -174,7 +315,7 @@ class CRMClaim(models.Model):
     priority = fields.Selection([('0', 'Low'), ('1', 'Normal'), ('2', 'High')], string='Priority',
                                 default="1")
     state = fields.Selection(
-        [('draft', 'Draft'), ('approve', 'Approved'), ('process', 'Processing'),
+        [('draft', 'Draft'), ('approve', 'Approved'), ('action', 'Action'), ('process', 'Processing'),
          ('close', 'Closed'), ('reject', 'Rejected')], default='draft', copy=False,
         track_visibility="onchange")
 
@@ -252,16 +393,19 @@ class CRMClaim(models.Model):
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
         context = dict(self._context or {})
+
         if vals.get('code', 'New') == 'New':
             vals['code'] = self.env['ir.sequence'].next_by_code('crm.claim.ept')
         if vals.get('section_id') and not context.get('default_section_id'):
             context['default_section_id'] = vals.get('section_id')
         res = super(CRMClaim, self).create(vals)
+
         reg = {
             'res_id': res.id,
             'res_model': 'crm.claim.ept',
             'partner_id': res.partner_id.id,
         }
+
         if not self.env['mail.followers'].search(
                 [('res_id', '=', res.id), ('res_model', '=', 'crm.claim.ept'),
                  ('partner_id', '=', res.partner_id.id)]):
@@ -465,7 +609,8 @@ class CRMClaim(models.Model):
             # date 19_02_2020 Addedby Haresh Mori
             # repair_line and self.create_return_picking_for_repair(repair_line)
             # self.return_picking_id and self.return_picking_id.write({'claim_id':self.id})
-            self.write({'state': 'process'})
+            #self.write({'state': 'process'})
+            elf.write({'state': 'action'})
         else:
             self.create_return_picking()
             self.return_picking_id and self.return_picking_id.write({'claim_id': self.id})
@@ -716,13 +861,78 @@ class CRMClaim(models.Model):
             'res_id': ticket_claim_id.new_sale_id.id
         }
 
+    def close_claim(self):
+        """
+        This method used to close a claim.
+        Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
+        """
+        repair_order_obj = self.env["repair.order"]
+        print('close cliam self:', self)
+        print('self.state:', self.state)
+        if self.state != 'process':
+            raise Warning("Claim can't process.")
+        if self.return_picking_id.state != 'done' and not self.is_rma_without_incoming:
+            raise Warning("Please first validate Return Picking Order.")
+        if self.internal_picking_id and self.internal_picking_id.state != 'done':
+            raise Warning("Please first validate Internal Transfer Picking Order.")
+        return_lines = []
+        refund_lines = []
+        do_lines = []
+        so_lines = []
+        for line in self.claim_line_ids:
+            if line.claim_type == 'repair':
+                for id in self.repair_order_ids:
+                    if id.state == 'done':
+                        for pick_id in id.picking_ids:
+                            if pick_id.state != 'done':
+                                raise Warning(_("The picking is not done "))
+                    else:
+                        raise Warning(_("The repair is not  done "))
+                # if self.is_rma_without_incoming:
+                #     do_lines.append(line)
+                # else:
+                #     return_lines.append(line)
+            if line.claim_type == 'refund':
+                for id in self.refund_invoice_ids:
+                    if id.state == 'posted':
+                       continue
+                    else:
+                        raise Warning(_("The invoice is not  posted "))
+
+            if line.claim_type == 'replace_same_product':
+                for id in self.to_return_picking_ids:
+                    if id.state == 'done':
+                        continue
+                    else:
+                        raise Warning(_("The delivery is not  done "))
+
+            if line.claim_type == 'replace_other_product':
+                for id in self.new_sale_id:
+                    if id.state == 'done':
+                        for pick_id in id.picking_ids:
+                            if pick_id.state != 'done':
+                                raise Warning(_("The picking is not done "))
+                    else:
+                        raise Warning(_("The replace sale order is not  done "))
+
+
+        self.state = 'close'
+        #self.state = 'process'
+
+        self.action_rma_send_email()
+        # return {
+        #     'type':'ir.actions.client',
+        #     'tag':'reload',
+        # }
+        return self
+
     def process_claim(self):
         """
         This method used to process a claim.
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
         repair_order_obj = self.env["repair.order"]
-        if self.state != 'process':
+        if self.state != 'action':
             raise Warning("Claim can't process.")
         if self.return_picking_id.state != 'done' and not self.is_rma_without_incoming:
             raise Warning("Please first validate Return Picking Order.")
@@ -796,7 +1006,9 @@ class CRMClaim(models.Model):
         refund_lines and self.create_refund(refund_lines)
         do_lines and self.create_do(do_lines)
         so_lines and self.create_so(so_lines)
-        self.state = 'close'
+        #self.state = 'close'
+        self.state = 'process'
+
         self.action_rma_send_email()
         # return {
         #     'type':'ir.actions.client',
@@ -829,6 +1041,7 @@ class CRMClaim(models.Model):
         This method used to create a sale order.
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
+
         sale_order = self.env['sale.order']
         order_vals = {
             'company_id': self.company_id.id,

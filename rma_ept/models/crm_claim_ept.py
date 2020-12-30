@@ -498,7 +498,7 @@ class CRMClaim(models.Model):
                 'picking_id', '=',
                 self.return_picking_id.id if claim_lines else self.picking_id.id),
                                                      ('sale_line_id', '=',
-                                                      line.move_id.sale_line_id.id)])
+                                                      line.move_id.sale_line_id.id)],limit=1)
             return_line = self.env['stock.return.picking.line'].create(
                 {'product_id': line.product_id.id, 'quantity': line.quantity,
                  'wizard_id': return_picking_wizard.id,

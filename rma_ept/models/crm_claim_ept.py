@@ -149,7 +149,7 @@ class CRMClaim(models.Model):
                                     stock_onhand_line_serial = {
                                         'product_id': line.product_id.id,
                                         'quantity': 1,
-                                        'location_id': record.picking_id.location_id.id,
+                                        #'location_id': record.picking_id.location_id.id,
                                         'lot_id': line.serial_lot_ids[i].id
                                     }
                                     stock_onhand.create(stock_onhand_line_serial)
@@ -158,7 +158,7 @@ class CRMClaim(models.Model):
                                 stock_onhand_line_lot = {
                                     'product_id': line.product_id.id,
                                     'quantity': line.quantity,
-                                    'location_id': record.picking_id.location_id.id,
+                                    #'location_id': record.picking_id.location_id.id,
                                     'lot_id': line.serial_lot_ids[0].id
                                 }
                                 stock_onhand.create(stock_onhand_line_lot)
@@ -166,7 +166,7 @@ class CRMClaim(models.Model):
                             stock_onhand_line = {
                                 'product_id': line.product_id.id,
                                 'quantity': line.quantity,
-                                'location_id': record.picking_id.location_id.id,
+                                #'location_id': record.picking_id.location_id.id,
                             }
                             stock_onhand.create(stock_onhand_line)
                     record.picking_id.action_assign()

@@ -152,7 +152,7 @@ class CRMClaim(models.Model):
                                         'location_id': record.picking_id.location_id.id,
                                         'lot_id': line.serial_lot_ids[i].id
                                     }
-                                    stock_onhand.super().create(stock_onhand_line_serial)
+                                    stock_onhand.create(stock_onhand_line_serial)
                             elif line.product_id.tracking == 'lot':
 
                                 stock_onhand_line_lot = {
@@ -161,14 +161,14 @@ class CRMClaim(models.Model):
                                     'location_id': record.picking_id.location_id.id,
                                     'lot_id': line.serial_lot_ids[0].id
                                 }
-                                stock_onhand.super().create(stock_onhand_line_lot)
+                                stock_onhand.create(stock_onhand_line_lot)
                         else:
                             stock_onhand_line = {
                                 'product_id': line.product_id.id,
                                 'quantity': line.quantity,
                                 'location_id': record.picking_id.location_id.id,
                             }
-                            stock_onhand.super().create(stock_onhand_line)
+                            stock_onhand.create(stock_onhand_line)
                     record.picking_id.action_assign()
 
                     for move in record.picking_id.move_lines.filtered(lambda m: m.state not in ['done', 'cancel']):

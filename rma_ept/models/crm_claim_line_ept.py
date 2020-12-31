@@ -103,10 +103,10 @@ class CRMClaimLine(models.Model):
     # serial_lot_ids = fields.One2many("stock.production.lot", "claim_line_id", string="Lot/Serial "
     #                                                                                  "Number", )
     serial_lot_ids = fields.Many2many("stock.production.lot", string="Lot/Serial Number")
-    fail_description = fields.Char("fail description", string="Fail Description", require=True)
-    warranty = fields.Selection([('in warranty', 'In Warranty'), ('out warranty', 'Out of Warranty'),
-             ('Artificial', 'Artificial'), ('DOA', 'DOA')],
-            "Warranty Type", require=True,copy=False)
+    #fail_description = fields.Char("fail description", string="Fail Description", require=True)
+    #warranty = fields.Selection([('in warranty', 'In Warranty'), ('out warranty', 'Out of Warranty'),
+    #         ('Artificial', 'Artificial'), ('DOA', 'DOA')],
+    #        "Warranty Type", require=True,copy=False)
 
     def write(self, vals):
         """

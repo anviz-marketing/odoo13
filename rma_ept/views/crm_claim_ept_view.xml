@@ -197,7 +197,6 @@
                                                 <!--                                                domain="[('id', 'in',parent.picking_id.move_lines.move_line_ids.lot_id)]"-->
                                                 <!--domain="[('product_id', '=',product_id))]"-->
                                                 <field name="fail_description"
-                                                       widget="many2many_tags"
 
                                                        options="{'no_create': False, 'no_create_edit':False}"
                                                        attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/>

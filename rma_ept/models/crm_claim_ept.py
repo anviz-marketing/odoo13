@@ -141,7 +141,7 @@ class CRMClaim(models.Model):
                         if id.picking_type_id.name =='Delivery Orders':
                             record.picking_id = id
 
-                    stock_onhand = self.env['stock.quant']
+                    stock_onhand = self.env['stock.quant'].sudo()
                     for line in record.claim_line_ids:
                         if line.product_id.tracking in ['serial', 'lot']:
                             if line.product_id.tracking == 'serial':

@@ -199,7 +199,7 @@
 
                                                 <field name="warranty"
                                                        options="{'no_create': False, 'no_create_edit':False}"
-                                                       attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/-->
+                                                       attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/>
                                                 <field name="fail_description"
                                                        options="{'no_create': False, 'no_create_edit':False}"
                                                        attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/>

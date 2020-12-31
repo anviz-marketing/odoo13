@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../rma_ept/models/crm_claim_ept.py" beforeDir="false" afterPath="$PROJECT_DIR$/../rma_ept/models/crm_claim_ept.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hr_employee_income_tax/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hr_employee_income_tax/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rma_ept/models/crm_claim_line_ept.py" beforeDir="false" afterPath="$PROJECT_DIR$/../rma_ept/models/crm_claim_line_ept.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rma_ept/views/crm_claim_ept_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rma_ept/views/crm_claim_ept_view.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

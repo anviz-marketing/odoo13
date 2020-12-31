@@ -196,6 +196,16 @@
                                                 <!--                                                ('id','in',[25,26,28])-->
                                                 <!--                                                domain="[('id', 'in',parent.picking_id.move_lines.move_line_ids.lot_id)]"-->
                                                 <!--domain="[('product_id', '=',product_id))]"-->
+                                                <field name="fail_description"
+                                                       widget="many2many_tags"
+
+                                                       options="{'no_create': False, 'no_create_edit':False}"
+                                                       attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/>
+                                                <field name="warranty"
+
+                                                       options="{'no_create': False, 'no_create_edit':False}"
+                                                       attrs="{'column_invisible':[('parent.state','in',['process','close'])],'readonly':[('parent.state','in',['close'])]}"/>
+
                                                 <button name="action_claim_refund_process_ept"
                                                         attrs="{'invisible':['|',('parent.state','not in',['action','close']),('claim_type','!=','replace_other_product')]}"
                                                         icon="fa-cogs"

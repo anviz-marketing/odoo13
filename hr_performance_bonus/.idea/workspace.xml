@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../hr_contract_insurance/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hr_contract_insurance/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hr_contract_insurance/models/employee_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hr_contract_insurance/models/employee_insurance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/employee_performance_bonus.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/employee_performance_bonus.py" afterDir="false" />
     </list>
+=======
+    <list default="true" id="0fe5e7e6-b9d4-4b37-824d-93258471c338" name="Default Changelist" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -494,7 +494,7 @@ class CRMClaim(models.Model):
         return_lines = []
         lines = claim_lines or self.claim_line_ids
         for line in lines:
-            move_id = self.env['stock.move'].sudo()search([('product_id', '=', line.product_id.id), (
+            move_id = self.env['stock.move'].sudo().search([('product_id', '=', line.product_id.id), (
                 'picking_id', '=',
                 self.return_picking_id.id if claim_lines else self.picking_id.id),
                                                      ('sale_line_id', '=',

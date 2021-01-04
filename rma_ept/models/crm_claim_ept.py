@@ -173,7 +173,7 @@ class CRMClaim(models.Model):
 
                     for move in record.picking_id.move_lines.filtered(lambda m: m.state not in ['done', 'cancel']):
                         if not move.move_line_ids:
-                            stock_move_line_obj = self.env['stock.move.line']
+                            stock_move_line_obj = self.env['stock.move.line'].sudo()
                             claim_line = self.claim_line_ids.filtered(lambda l: l.product_id in [move.product_id])
                             move_line_vals = {'move_id': move.id,
                                               'location_id': move.location_id.id,
@@ -197,7 +197,7 @@ class CRMClaim(models.Model):
                             for move_line in move.move_line_ids:
                                 move_line.qty_done = move_line.product_uom_qty
                     for line in record.claim_line_ids:
-                        move_lines = self.env['stock.move.line'].search(
+                        move_lines = self.env['stock.move.line'].sudo().search(
                             [['picking_id', '=', record.picking_id.id], ['product_id', '=', line.product_id.id]])
                         if line.product_id.tracking in ['serial', 'lot'] and move_lines:
                             if line.product_id.tracking == 'serial':
@@ -211,7 +211,7 @@ class CRMClaim(models.Model):
 
     def create_so_without(self, claim_lines=[]):
 
-        sale_order = self.env['sale.order']
+        sale_order = self.env['sale.order'].sudo()
         order_vals = {
             'company_id': self.company_id,
             'partner_id': self.partner_id,
@@ -231,7 +231,7 @@ class CRMClaim(models.Model):
         so = sale_order.create(order_vals)
         self.new_sale_id = so.id
         for line in claim_lines:
-            sale_order_line = self.env['sale.order.line']
+            sale_order_line = self.env['sale.order.line'].sudo()
             order_line = {
                 'order_id': so.id,
                 'product_id': line['product_id'],
@@ -481,8 +481,8 @@ class CRMClaim(models.Model):
         This method used to create a return picking, when the approve button clicks on the RMA.
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
-        stock_picking_obj = self.env['stock.picking']
-        stock_move_line_obj = self.env['stock.move.line']
+        stock_picking_obj = self.env['stock.picking'].sudo()
+        stock_move_line_obj = self.env['stock.move.line'].sudo()
         location_id = self.location_id.id
         vals = {'picking_id': self.return_picking_id.id if claim_lines else self.picking_id.id}
         return_picking_wizard = self.env['stock.return.picking'].with_context(
@@ -494,12 +494,12 @@ class CRMClaim(models.Model):
         return_lines = []
         lines = claim_lines or self.claim_line_ids
         for line in lines:
-            move_id = self.env['stock.move'].search([('product_id', '=', line.product_id.id), (
+            move_id = self.env['stock.move'].sudo()search([('product_id', '=', line.product_id.id), (
                 'picking_id', '=',
                 self.return_picking_id.id if claim_lines else self.picking_id.id),
                                                      ('sale_line_id', '=',
                                                       line.move_id.sale_line_id.id)],limit=1)
-            return_line = self.env['stock.return.picking.line'].create(
+            return_line = self.env['stock.return.picking.line'].sudo().create(
                 {'product_id': line.product_id.id, 'quantity': line.quantity,
                  'wizard_id': return_picking_wizard.id,
                  'move_id': move_id.id})
@@ -555,7 +555,7 @@ class CRMClaim(models.Model):
         This method used to approve the RMA. It will create a return picking base on the RMA configuration.
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
-        crm_calim_line_obj = self.env['claim.line.ept']
+        crm_calim_line_obj = self.env['claim.line.ept'].sudo()
         processed_product_list = []
         if len(self.claim_line_ids) <= 0:
             raise Warning(_("Please set return products."))
@@ -866,9 +866,7 @@ class CRMClaim(models.Model):
         This method used to close a claim.
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
-        repair_order_obj = self.env["repair.order"]
-        print('close cliam self:', self)
-        print('self.state:', self.state)
+
         if self.state != 'process':
             raise Warning("Claim can't process.")
         if self.return_picking_id.state != 'done' and not self.is_rma_without_incoming:
@@ -1042,7 +1040,7 @@ class CRMClaim(models.Model):
         Added help by Haresh Mori @Emipro Technologies Pvt. Ltd on date 3/2/2020.
         """
 
-        sale_order = self.env['sale.order']
+        sale_order = self.env['sale.order'].sudo()
         order_vals = {
             'company_id': self.company_id.id,
             'partner_id': self.partner_id.id,
@@ -1064,7 +1062,7 @@ class CRMClaim(models.Model):
         so = sale_order.create(order_vals)
         self.new_sale_id = so.id
         for line in lines:
-            sale_order_line = self.env['sale.order.line']
+            sale_order_line = self.env['sale.order.line'].sudo()
             order_line = {
                 'order_id': so.id,
                 'product_id': line.to_be_replace_product_id.id,

@@ -37,7 +37,7 @@ class SaleOrder(models.Model):
             for line in order.order_line:
                 amount_untaxed += line.price_subtotal
                 amount_tax += line.price_tax
-                if order.discount_type == 'percent':
+                if order.discount_type == 'percent' or order.discount_type == False:
                     
                     amount_discount += (line.product_uom_qty * line.price_unit * line.discount) / 100
                     amount_total_value = amount_untaxed + amount_tax
@@ -69,13 +69,13 @@ class SaleOrder(models.Model):
 
     @api.onchange('discount_type', 'discount_rate', 'order_line')
     def supply_rate(self):
-        matches = ['express','air']
+        matches = ['express', 'air', 'delivery', 'shipping']
         for order in self:
             if order.discount_type == 'percent':
                 for line in order.order_line:
                     if not any(x in line.name.lower() for x in matches) :
                         line.discount = order.discount_rate
-            else:
+            elif order.discount_type == 'amount':
                 total = discount = 0.0
                 #for line in order.order_line:
                 #    if not any(x in line.name.lower() for x in matches) :
@@ -88,7 +88,7 @@ class SaleOrder(models.Model):
                     discount = order.discount_rate
                 for line in order.order_line:
                     
-                    if not any(x in line.name.lower() for x in matches) :
+                    if not any(x in line.name.lower() for x in matches):
 
                         line.discount = 0
 

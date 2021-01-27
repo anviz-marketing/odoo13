@@ -54,7 +54,7 @@ class SaleOrder(models.Model):
 
 
     discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount type',
-                                     readonly=True,states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
+                                     readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
                                      default='percent')
     discount_rate = fields.Float('Discount Rate', digits=dp.get_precision('Account'),
                                  readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
@@ -83,7 +83,7 @@ class SaleOrder(models.Model):
                 #        total += round((line.product_uom_qty * line.price_unit))
                 if order.discount_rate != 0:
                     #discount = (order.discount_rate / total) * 100
-                    discount= order.discount_rate
+                    discount = order.discount_rate
                 else:
                     discount = order.discount_rate
                 for line in order.order_line:

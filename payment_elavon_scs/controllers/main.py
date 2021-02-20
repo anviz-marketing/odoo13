@@ -48,6 +48,7 @@ class ElavonController(http.Controller):
         order_id = post.get('order_id')
         sale_order_id = post.get('sale_order_id')
         invoice_id = post.get('inv_id')
+        invoice_ref = post.get('inv_ref')
         if order_id or sale_order_id:
 
             if order_id:
@@ -62,8 +63,12 @@ class ElavonController(http.Controller):
             'lname': ''
             }
 
-        elif invoice_id:
-            inv_id = request.env['account.move'].sudo().search([('id', '=', invoice_id)])
+        elif invoice_id or invoice_ref:
+            if invoice_id:
+                domain = [('id', '=', invoice_id)]
+            else:
+                domain = [('name', '=', invoice_ref)]
+            inv_id = request.env['account.move'].sudo().search(domain)
             vales = {
                     'id': inv_id.id,
                     'amount': inv_id.amount_residual,

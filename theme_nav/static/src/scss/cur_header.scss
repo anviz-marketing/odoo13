@@ -1,0 +1,109 @@
+#cur_header{
+    height: 55px;
+    padding: 0 0;
+    display: block;
+    -webkit-transition: background .2s !important;
+    transition: background .2s !important;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    .navbar{
+        -webkit-transition: background-color .2s linear !important;
+        transition: background-color .2s linear !important;
+        background: rgba(0,0,0,0.1) !important;
+        @media (max-width: 850px){
+            background: #4a4a4a !important;
+            padding: 0.5rem 0.5rem;
+        }
+        .nav{
+            justify-content: flex-start;
+            width: 100%;
+        }
+        .logo{
+            @media (min-width: 721px) and (max-width: 850px){
+                text-align: center;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                max-width: 100%;
+                img{
+                    max-height: 2rem;
+                }
+            }
+            @media (max-width: 720px){
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                img{
+                    max-height: 2rem;
+                }
+            }
+        }
+        .navbar-collapse{
+            @media (min-width: 721px) and (max-width: 850px){
+                background-color: #4A4A4A;
+                z-index: 99;
+                position: fixed;
+                left: 0;
+                width: 100%;
+                top: 92px;
+                padding: 0 1em;
+                display: -webkit-box !important;
+                display: -webkit-flex !important;
+                display: flex !important;
+                flex-basis: auto;
+                flex-grow: 1;
+                align-items: center;
+            }
+        }
+        li{
+            &:last-child{
+                position: absolute;
+                right: 15px;
+            }
+            @media (min-width: 721px) and (max-width: 850px){
+                &.divider{
+                    opacity: 0;
+                }
+                span{
+                    color: #fff;
+                }
+                &.dropdown{
+                    .nav-link{
+                        color: #fff;
+                    }
+                }
+            }
+            @media (max-width: 720px){
+                .nav-link{
+                    text-align: left;
+                    display: block;
+                    padding: 0.75rem 0.9375rem;
+                    color: #fff;
+                    
+                }
+                &:last-child{
+                    position: relative;
+                    right: 0;
+                }
+            }
+        }
+        button{
+            &.navbar-toggler{
+                border: none;
+                outline: none;
+            }
+            .navbar-toggler-icon{
+                @media (max-width: 720px){
+                    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+                }
+            }
+        }
+    }
+    @media (min-width: 1200px){
+        .container {
+            max-width: 1920px;
+        }
+    }
+}
+

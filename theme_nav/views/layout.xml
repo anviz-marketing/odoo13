@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="custom_header" inherit_id="website.layout" name="Custom Header">
+        <xpath expr="//div[@id='wrapwrap']/header" position="attributes">
+            <attribute name="id">cur_header</attribute>
+        </xpath>
+    </template>
+
+    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+        <xpath expr="//div[@id='wrapwrap']/footer" position="attributes">
+            <attribute name="id">cur_footer</attribute>
+        </xpath>
+    </template>
+</odoo>
